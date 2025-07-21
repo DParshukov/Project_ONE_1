@@ -1,0 +1,51 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+local_settings.py
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# dotenv
+.env
+
+# Docker
+*.pid
+*.seed
+
+# Mac and Windows
+.DS_Store
+Thumbs.db
+
+# Test
+.coverage
+htmlcov/
+pytest_cache/
+
+# Migrations cache
+*/migrations/__pycache__/
+*/migrations/*.pyc
