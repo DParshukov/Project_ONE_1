@@ -8,7 +8,7 @@ POSTGRES_PORT,
 USE_SQLIT.
 Самая интересная из них это USE_SQLIT, она нужна для того, чтобы можно было использовать локально на машине SQLite(
 для этого нужно просто в .env написать USE_SQLIT=true),
-а чтобы в докере поднимать Postgres нужно прописать false и собрать dokcer compose
+а чтобы в докере поднимать Postgres нужно прописать(USE_SQLIT=false) и собрать dokcer compose
 
     path('rooms/list/', RoomListView.as_view(), name="rooms_list" ), - просмотр спика комнат
     path('room/create/',RoomCreateView.as_view(),name="room_create"), -создание комнаты, также нужно передать description и price
