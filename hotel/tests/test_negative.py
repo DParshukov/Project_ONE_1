@@ -5,7 +5,7 @@ from hotel.models import Room, Booking
 @pytest.mark.django_db
 def test_create_booking_nonexistent_room():
     client=APIClient()
-    url='/booking/create/'
+    url='/booking/'
     data={
         'room_id':5,
         'date_start':'2025-09-4',
@@ -17,7 +17,7 @@ def test_create_booking_nonexistent_room():
 @pytest.mark.django_db
 def test_create_room_without_description():
     client=APIClient()
-    url='/room/create/'
+    url='/rooms/'
     data={
         'price':5000
     }
@@ -27,6 +27,6 @@ def test_create_room_without_description():
 @pytest.mark.django_db
 def test_delete_nonexistent_room():
     client = APIClient()
-    url = '/room/delete/99999/'
+    url = '/rooms/99999/'
     response = client.delete(url)
     assert response.status_code == 404

@@ -5,33 +5,23 @@ from .models import Room, Booking
 class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
-        fields = ["id", "price", "description", "creation_time"]
+        fields = ["id", "price", "description", "created_at"]
 
-class RoomCreateSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = Room
-        fields=["description","price"]
 
 
     def to_representation(self, instance):
-        return {"room":instance.id}
+        if self.context.get('only_id'):
+            return {'room':instance.id}
+        return super().to_representation(instance)
 
 class BookingSerializer(serializers.ModelSerializer):
 
-    booking_id=serializers.IntegerField(source="id")
-
-
-    class Meta:
-        model = Booking
-        fields=["booking_id", "date_start", "date_end"]
-
-class BookingCreateSerializers(serializers.ModelSerializer):
-
+    booking_id=serializers.IntegerField(source="id", read_only=True)
     room_id=serializers.PrimaryKeyRelatedField(queryset=Room.objects.all(),
-                                               source="room")
+                                               source="room", write_only=True )
     class Meta:
         model = Booking
-        fields=["room_id", "date_start", "date_end"]
+        fields=["booking_id", "room_id", "date_start", "date_end"]
 
     def validate(self, data):
         date_start=data["date_start"]
@@ -49,5 +39,9 @@ class BookingCreateSerializers(serializers.ModelSerializer):
             raise serializers.ValidationError({"room is already booked for the selected dates"})
 
         return data
+
+
     def to_representation(self, instance):
-        return {"booking_id":instance.id}
+        if self.context.get('only_id'):
+            return {"booking_id":instance.id}
+        return super().to_representation(instance)
