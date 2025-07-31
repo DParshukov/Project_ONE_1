@@ -7,7 +7,7 @@ from rest_framework.test import APIClient
 @pytest.mark.django_db
 def test_create_room():
     client=APIClient()
-    url='/room/create/'
+    url='/rooms/'
     data={
         'description':'Комната у дороги',
         'price':5000
@@ -20,7 +20,7 @@ def test_create_room():
 @pytest.mark.django_db
 def test_get_list_room():
     client=APIClient()
-    url='/rooms/list/'
+    url='/rooms/'
     from hotel.models import Room
     room1 = Room.objects.create(description='room 1', price=6000)
     room2 = Room.objects.create(description='room 2', price=4500)
@@ -38,7 +38,7 @@ def test_get_list_room():
 @pytest.mark.django_db
 def test_delete_room():
     client=APIClient()
-    url='/room/delete/1/'
+    url='/rooms/1/'
     from hotel.models import Room
     room1=Room.objects.create(description='room 1', price=6000)
     response=client.delete(url)

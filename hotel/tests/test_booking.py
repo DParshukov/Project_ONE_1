@@ -4,7 +4,7 @@ from hotel.models import Room, Booking
 @pytest.mark.django_db
 def test_create_booking():
     client=APIClient()
-    url='/booking/create/'
+    url='/booking/'
     data={
         'room_id':1,
         'date_start':'2025-12-1',
@@ -19,7 +19,7 @@ def test_create_booking():
 @pytest.mark.django_db
 def test_booking_date_intersection():
     client=APIClient()
-    url='/booking/create/'
+    url='/booking/'
     data={
         'room_id':1,
         'date_start':'2025-11-1',
@@ -35,7 +35,7 @@ def test_booking_date_intersection():
 @pytest.mark.django_db
 def test_get_booking_for_room():
     client=APIClient()
-    url='/booking/list/?room_id=1'
+    url='/booking/?room_id=1'
     room1=Room.objects.create(description='room 1', price=8000)
     booking1=Booking.objects.create(room=room1, date_start='2025-11-5', date_end='2025-11-9')
     booking2 = Booking.objects.create(room=room1, date_start='2025-12-5', date_end='2025-12-9')
@@ -50,7 +50,7 @@ def test_delete_booking():
     room1=Room.objects.create(description='room 1', price=8000)
     booking1=Booking.objects.create(room=room1, date_start='2025-11-5', date_end='2025-11-9')
     a=booking1
-    url=f'/booking/delete/{booking1.id}/'
+    url=f'/booking/{booking1.id}/'
     response=client.delete(url)
     assert response.status_code == 200
     b=booking1.id
